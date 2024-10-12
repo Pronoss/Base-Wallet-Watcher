@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base Wallet Balance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Check Wallet Balance on Base</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <input type="text" name="address" placeholder="Enter wallet address" value="{{ address }}" required>
+            <button type="submit">Check Balance</button>
+        </form>
+        {% if balance is not none %}
+            <h2>Balance: {{ balance }} BASE</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
